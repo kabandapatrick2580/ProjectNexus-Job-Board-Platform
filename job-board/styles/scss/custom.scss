@@ -7,12 +7,12 @@ body{
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     line-height: 1.5;
-    background-color: #cca5a5;
+    background-color: $primary-background;
 }
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px; // Adjust spacing between cards
+    gap: 44px; // Adjust spacing between cards
     align-items: stretch; // Ensures cards stretch to equal height
   }
   
