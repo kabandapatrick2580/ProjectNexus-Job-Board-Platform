@@ -24,3 +24,7 @@ export interface CardProps {
     content: string;
     variant?: "default" | "primary" | "danger" | "success" | "warning";
   }
+
+export interface ImageProps {
+  image: string;
+}

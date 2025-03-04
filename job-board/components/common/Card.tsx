@@ -1,16 +1,25 @@
 import React, { FC } from 'react';
 import { JobProps } from '@/interfaces';
+import { ImageProps } from '@/interfaces';
+import Image from 'next/image';
+import { SAMPLEIMAGES } from '@/constants';
 
 interface JobCardProps {
   job: JobProps;
-  children?: React.ReactNode; 
-}
+  children?: React.ReactNode;
+  logo: ImageProps;
+};
 
-const Card: FC<JobCardProps> = ({ job, children }) => {
+
+const Card: FC<JobCardProps> = ({ job,logo, children }) => {
   return (
     <div className="job-card">
         <div className="logo">
-          <i className="fi fi-rr-corporate-alt"></i>
+        {logo?.image ? (
+          <Image src={logo.image} alt={`${job.company} logo`} width={50} height={50} className="company-logo" />
+        ) : (
+          <i className="fi fi-rr-corporate-alt"></i> // Default icon if no logo
+        )}
         </div>
       <div className="company-info">
 
