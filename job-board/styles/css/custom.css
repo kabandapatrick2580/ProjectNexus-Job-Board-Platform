@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+.btn-primary {
+  color: #00728f;
+  background: transparent;
+  padding: 10px 20px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+}
+.btn-primary:hover {
+  color: #fff;
+  background: #0056b3;
+  border: 1px solid #0056b3;
+}
+
+.job-card {
+  padding: 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+.job-card h3 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+.job-card .job-category {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #0070f3;
+}
+.job-card .job-location {
+  font-size: 0.9rem;
+  color: #555;
+}
+.job-card .job-experience {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #ff6600;
+}
+.job-card .job-company {
+  font-size: 0.9rem;
+  color: #222;
+}
+.job-card .apply-button {
+  background-color: #0070f3;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.job-card .apply-button:hover {
+  background-color: #005bb5;
+}
+
+.job-card-default {
+  background-color: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.job-card-featured {
+  background-color: #f9f9f9;
+  border: 1px solid #0070f3;
+  box-shadow: 0 4px 8px rgba(0, 91, 181, 0.2);
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  background-color: #cca5a5;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  background: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.card-content {
+  flex-grow: 1;
+}
+
+.card-footer {
+  margin-top: auto;
+}
+
+/*# sourceMappingURL=custom.css.map */

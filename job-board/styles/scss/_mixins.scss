@@ -1,0 +1,24 @@
+@mixin Button($color, $background, $border, $hoverColor, $hoverBackground, $hoverBorder) {
+    color: $color;
+    background: transparent;
+    padding: 10px 20px;
+    border: 1px solid #fff ;
+    border-radius: 5px;
+  &:hover {
+    color: $hoverColor;
+    background: $hoverBackground;
+    border: $hoverBorder;
+  }
+}
+
+@mixin card-variant($bg-color, $border-color, $shadow-color) {
+    background-color: $bg-color;
+    border: 1px solid $border-color;
+    box-shadow: 0 4px 8px rgba($shadow-color, 0.2);
+  }
+
+@mixin job-card-variant($bg, $border, $shadow) {
+background-color: $bg;
+border: 1px solid $border;
+box-shadow: 0 4px 8px rgba($shadow, 0.2);
+}

@@ -1,0 +1,37 @@
+@use 'variables' as *;
+@use 'components' as *;
+@use 'mixins' as *;
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+body{
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    background-color: #cca5a5;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px; // Adjust spacing between cards
+    align-items: stretch; // Ensures cards stretch to equal height
+  }
+  
+  .card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 100%; // Makes all cards take full available height
+  }
+  
+  .card-content {
+    flex-grow: 1; // Ensures content stretches
+  }
+  
+  .card-footer {
+    margin-top: auto; // Pushes footer (e.g., Button) to the bottom
+  }
+  

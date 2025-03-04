@@ -1,0 +1,93 @@
+@use 'mixins' as *;
+@use 'variables' as *;
+
+// primary buttons
+.btn-primary {
+    @include Button($primary-color, $primary-background, $primary-border, $primary-hover-color, $primary-hover-background, $primary-hover-border);
+}
+
+// styles/_components.scss
+
+// Mixin for job card styles
+
+  
+  // Job card base styles
+  .job-card {
+    padding: 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+  
+    h3 {
+      margin: 0;
+      font-size: 1.3rem;
+    }
+  
+    .job-category {
+      font-size: 0.9rem;
+      font-weight: bold;
+      color: #0070f3;
+    }
+  
+    .job-location {
+      font-size: 0.9rem;
+      color: #555;
+    }
+  
+    .job-experience {
+      font-size: 0.9rem;
+      font-weight: bold;
+      color: #ff6600;
+    }
+  
+    .job-company {
+      font-size: 0.9rem;
+      color: #222;
+    }
+  
+    .apply-button {
+      background-color: #0070f3;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+      &:hover {
+        background-color: #005bb5;
+      }
+    }
+  }
+  
+  // Job card variations
+  .job-card-default {
+    @include job-card-variant(white, #ddd, #000);
+  }
+  
+  .job-card-featured {
+    @include job-card-variant(#f9f9f9, #0070f3, #005bb5);
+  }
+  
+  .top-card {
+    display: flex;
+  }
+
+  .company-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100px;
+    height:100px;
+    border-radius: 5px;
+    background-color: #8f8d8d;
+  }
+
+  .company-details{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+ 
