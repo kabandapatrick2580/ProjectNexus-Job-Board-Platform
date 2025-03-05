@@ -3,7 +3,7 @@ export interface JobProps {
     title: string;
     category: string;
     location: string;
-    experience: string;
+    experience_level: string;
     company: string;
   }
   

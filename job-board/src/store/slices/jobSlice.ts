@@ -1,37 +1,53 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { JOBSLISTINGSAMPLE } from '@/constants'; // Import constant data
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import axios from 'axios';
 import { JobProps } from '@/interfaces';
+import { FILTERS } from '@/constants/filters';
 
 interface JobState {
-  jobs: JobProps[];
-  status: 'idle' | 'loading' | 'failed';
-  error: string | null;
-  filters: { location: string; experience: string };
+    jobs: JobProps[];
+    status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    error: string | null;
+    filters: typeof FILTERS;
 }
 
 const initialState: JobState = {
-  jobs: [],
-  status: 'idle',
-  error: null,
-  filters: { location: '', experience: '' },
+    jobs: [],
+    status: 'idle',
+    error: null,
+    filters: FILTERS,
 };
 
-const jobSlice = createSlice({
-  name: 'jobs',
-  initialState,
-  reducers: {
-    setJobs: (state, action: PayloadAction<JobProps[]>) => {
-      state.jobs = action.payload;
-    },
-    setFilters: (state, action: PayloadAction<{ location: string; experience: string }>) => {
-      state.filters = action.payload;
-    },
-  },
+export const fetchJobs = createAsyncThunk('jobs/fetchJobs', async () => {
+    const response = await axios.get('https://job-board-platform.onrender.com/api/job');
+    return response.data.results;
 });
 
-export const fetchJobs = () => async (dispatch: any) => {
-  dispatch(setJobs(JOBSLISTINGSAMPLE)); // Load jobs from constants
-};
+const jobSlice = createSlice({
+    name: 'jobs',
+    initialState,
+    reducers: {
+        setFilters: (state, action: PayloadAction<Partial<JobState['filters']>>) => {
+            state.filters = { ...state.filters, ...action.payload };
+        },
+        clearFilters: (state) => {
+            state.filters = FILTERS;
+        },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchJobs.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(fetchJobs.fulfilled, (state, action: PayloadAction<JobProps[]>) => {
+                state.status = 'succeeded';
+                state.jobs = action.payload;
+            })
+            .addCase(fetchJobs.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message || 'Something went wrong';
+            });
+    },
+});
 
-export const { setJobs, setFilters } = jobSlice.actions;
+export const { setFilters, clearFilters } = jobSlice.actions;
 export default jobSlice.reducer;
