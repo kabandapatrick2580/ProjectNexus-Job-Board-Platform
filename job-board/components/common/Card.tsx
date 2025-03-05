@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { JobProps } from '@/interfaces';
 import { ImageProps } from '@/interfaces';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface JobCardProps {
   job: JobProps;
@@ -34,7 +35,8 @@ const Card: FC<JobCardProps> = ({ job,logo, children }) => {
         <h3 className="job">{job.title}</h3>
         <p className='job-experience'>{job.experience_level.charAt(0).toUpperCase()+job.experience_level.slice(1)}-Level</p>
       </div>
-      <button className="button">Job details</button>
+      <Link className="button" href={`/jobs/${job.id}`}>Job Details
+      </Link>
     </div>
   );
 };
