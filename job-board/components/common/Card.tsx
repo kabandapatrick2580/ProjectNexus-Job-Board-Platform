@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { JobProps } from '@/interfaces';
 import { ImageProps } from '@/interfaces';
 import Image from 'next/image';
-import { SAMPLEIMAGES } from '@/constants';
 
 interface JobCardProps {
   job: JobProps;
