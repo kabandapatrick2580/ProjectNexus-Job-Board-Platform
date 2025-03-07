@@ -38,7 +38,6 @@ export default function JobDetailPage() {
     return (
         <div className="container mx-auto p-6">
             <JobDetails job={job} />
-
             {/* Apply Now Button */}
             <div className="mt-6">
                 <button

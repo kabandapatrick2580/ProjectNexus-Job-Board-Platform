@@ -38,11 +38,7 @@ export interface Applicant {
 }
 
 export interface JobApplication {
-  id: string;
-  applicant: Applicant;
   resume_link: string;
   cover_letter: string;
-  status: "pending" | "approved" | "rejected";
-  applied_at: string; // ISO 8601 Date String
   job: string;
 }

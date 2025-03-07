@@ -28,44 +28,48 @@ const JobApplicationForm = () => {
     setMessage("");
 
     const applicationData: JobApplication = {
-      id: crypto.randomUUID(),
-      applicant: {
-        id: crypto.randomUUID(),
-        ...formData,
-      },
       resume_link: formData.resume_link,
       cover_letter: formData.cover_letter,
-      status: "pending",
-      applied_at: new Date().toISOString(),
       job: jobId as string,
     };
 
     try {
-      const response = await fetch("/api/application", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(applicationData),
-      });
-
-      if (response.ok) {
-        setMessage("Application submitted successfully!");
-        setFormData({
-          first_name: "",
-          last_name: "",
-          email: "",
-          phone: "",
-          resume_link: "",
-          cover_letter: "",
+        console.log("Sending application data:", applicationData); // Debugging before request
+        
+        const response = await fetch("https://job-board-platform.onrender.com/api/application/", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(applicationData),
         });
-      } else {
-        setMessage("Failed to submit application.");
+      
+        console.log("Response status:", response.status); // Debugging response status
+      
+        if (response.ok) {
+          console.log("Application submitted successfully!"); // Debugging success
+          setMessage("Application submitted successfully!");
+          
+          // Reset form data
+          setFormData({
+            first_name: "",
+            last_name: "",
+            email: "",
+            phone: "",
+            resume_link: "",
+            cover_letter: "",
+          });
+        } else {
+          const errorResponse = await response.json();
+          console.error("Failed to submit application. Response:", errorResponse);
+          setMessage("Failed to submit application.");
+        }
+      } catch (error) {
+        console.error("Error occurred while submitting application:", error);
+        setMessage("An error occurred.");
+      } finally {
+        console.log("Application submission process finished.");
+        setLoading(false);
       }
-    } catch (error) {
-      setMessage("An error occurred.");
-    } finally {
-      setLoading(false);
-    }
-  };
+    }      
 
   return (
     <div className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg">
