@@ -7,6 +7,7 @@ interface JobState {
     allJobs: JobProps[];
     jobs: JobProps[];
     locations: string[];
+    experienceLevels: string[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
     filters: typeof FILTERS;
@@ -18,6 +19,7 @@ const initialState: JobState = {
     allJobs: [],
     jobs: [],
     locations: [],
+    experienceLevels: [],
     status: 'idle',
     error: null,
     filters: FILTERS,
@@ -53,6 +55,10 @@ const jobSlice = createSlice({
                 filteredJobs = filteredJobs.filter(job => job.location.includes(state.filters.location));
             }
 
+            if (state.filters.experience_level) {
+                filteredJobs = filteredJobs.filter(job => job.experience_level === state.filters.experience_level);
+            }
+
             state.jobs = filteredJobs;
         },
         setJobsPerPage: (state, action: PayloadAction<number>) => {
@@ -71,6 +77,12 @@ const jobSlice = createSlice({
                 state.status = 'succeeded';
                 state.allJobs = action.payload;
                 state.jobs = action.payload;
+
+                // Extract unique locations
+                state.locations = [...new Set(action.payload.map(job => job.location))];
+
+                // Extract unique experience levels
+                state.experienceLevels = [...new Set(action.payload.map(job => job.experience_level))];
             })
             .addCase(fetchJobs.rejected, (state, action) => {
                 state.status = 'failed';

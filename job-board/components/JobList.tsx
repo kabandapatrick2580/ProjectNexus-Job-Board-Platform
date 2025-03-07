@@ -7,7 +7,7 @@ import { SAMPLEIMAGES } from "@/constants";
 
 const JobList: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
-  const { jobs, status, error, locations, filters } = useSelector((state: RootState) => state.jobs);
+  const { jobs, status, error, locations, experienceLevels, filters } = useSelector((state: RootState) => state.jobs);
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -15,14 +15,21 @@ const JobList: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchJobs());
-    dispatch(fetchLocations()); // Fetch locations for dropdown
+    dispatch(fetchLocations());
   }, [dispatch]);
 
   // Handle location filter change
   const handleLocationChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(setFilters({ location: event.target.value }));
     dispatch(applyFilters());
-    setCurrentPage(1); // Reset to first page after filtering
+    setCurrentPage(1);
+  };
+
+  // Handle experience level filter change
+  const handleExperienceChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(setFilters({ experience_level: event.target.value }));
+    dispatch(applyFilters());
+    setCurrentPage(1);
   };
 
   // Calculate pagination indexes
@@ -35,17 +42,33 @@ const JobList: React.FC = () => {
     <div className="job-list">
       <h1>Job Listings</h1>
 
-      {/* Location Filter */}
+      {/* Filters Section */}
       <div className="filter-container">
-        <label htmlFor="location">Filter by Location:</label>
-        <select id="location" value={filters.location || ""} onChange={handleLocationChange}>
-          <option value="">All Locations</option>
-          {locations.map((location) => (
-            <option key={location} value={location}>
-              {location}
-            </option>
-          ))}
-        </select>
+        {/* Location Filter */}
+        <div>
+          <label htmlFor="location">Filter by Location:</label>
+          <select id="location" value={filters.location || ""} onChange={handleLocationChange}>
+            <option value="">All Locations</option>
+            {locations.map((location) => (
+              <option key={location} value={location}>
+                {location}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Experience Level Filter */}
+        <div>
+          <label htmlFor="experience">Filter by Experience Level:</label>
+          <select id="experience" value={filters.experience_level || ""} onChange={handleExperienceChange}>
+            <option value="">All Levels</option>
+            {experienceLevels.map((level) => (
+              <option key={level} value={level}>
+                {level}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
       {status === "loading" && <p>Loading jobs...</p>}
