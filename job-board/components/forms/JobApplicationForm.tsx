@@ -60,7 +60,7 @@ const JobApplicationForm = () => {
         } else {
           const errorResponse = await response.json();
           console.error("Failed to submit application. Response:", errorResponse);
-          setMessage("Failed to submit application.");
+          setMessage(errorResponse.detail);
         }
       } catch (error) {
         console.error("Error occurred while submitting application:", error);

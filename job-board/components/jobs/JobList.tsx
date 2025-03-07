@@ -13,6 +13,9 @@ const JobList: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [jobsPerPage] = useState(10);
 
+  // Search state
+  const [searchQuery, setSearchQuery] = useState("");
+
   useEffect(() => {
     dispatch(fetchJobs());
     dispatch(fetchLocations());
@@ -32,15 +35,39 @@ const JobList: React.FC = () => {
     setCurrentPage(1);
   };
 
+  // Handle search input change
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value.toLowerCase());
+    setCurrentPage(1);
+  };
+
+  // Filter jobs based on search query
+  const filteredJobs = jobs.filter((job) =>
+    job.title.toLowerCase().includes(searchQuery) ||
+    job.company.toLowerCase().includes(searchQuery) ||
+    job.location.toLowerCase().includes(searchQuery)
+  );
+
   // Calculate pagination indexes
   const lastJobIndex = currentPage * jobsPerPage;
   const firstJobIndex = lastJobIndex - jobsPerPage;
-  const currentJobs = jobs.slice(firstJobIndex, lastJobIndex);
-  const totalPages = Math.ceil(jobs.length / jobsPerPage);
+  const currentJobs = filteredJobs.slice(firstJobIndex, lastJobIndex);
+  const totalPages = Math.ceil(filteredJobs.length / jobsPerPage);
 
   return (
     <div className="job-list">
       <h1>Job Listings</h1>
+
+      {/* Search Input */}
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Search jobs..."
+          value={searchQuery}
+          onChange={handleSearchChange}
+          className="search-input"
+        />
+      </div>
 
       {/* Filters Section */}
       <div className="filter-container">
@@ -76,10 +103,14 @@ const JobList: React.FC = () => {
 
       {/* Job Cards */}
       <div className="grid-container">
-        {currentJobs.map((job, index) => {
-          const logo = SAMPLEIMAGES[index % SAMPLEIMAGES.length];
-          return <Card key={job.id} job={job} logo={logo} />;
-        })}
+        {currentJobs.length > 0 ? (
+          currentJobs.map((job, index) => {
+            const logo = SAMPLEIMAGES[index % SAMPLEIMAGES.length];
+            return <Card key={job.id} job={job} logo={logo} />;
+          })
+        ) : (
+          <p>No jobs found</p>
+        )}
       </div>
 
       {/* Pagination */}
