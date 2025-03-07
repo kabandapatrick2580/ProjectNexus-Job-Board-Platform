@@ -10,7 +10,7 @@ export interface JobProps {
 export interface FilterProps {
     category: string;
     location: string;
-    experience: string;
+    experience_level: string;
   }
 
 export interface ButtonProps {

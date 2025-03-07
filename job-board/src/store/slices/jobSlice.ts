@@ -4,21 +4,34 @@ import { JobProps } from '@/interfaces';
 import { FILTERS } from '@/constants/filters';
 
 interface JobState {
+    allJobs: JobProps[];
     jobs: JobProps[];
+    locations: string[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
     filters: typeof FILTERS;
+    jobsPerPage: number;
+    currentPage: number;
 }
 
 const initialState: JobState = {
+    allJobs: [],
     jobs: [],
+    locations: [],
     status: 'idle',
     error: null,
     filters: FILTERS,
+    jobsPerPage: 10,
+    currentPage: 1,
 };
 
 export const fetchJobs = createAsyncThunk('jobs/fetchJobs', async () => {
     const response = await axios.get('https://job-board-platform.onrender.com/api/job');
+    return response.data.results;
+});
+
+export const fetchLocations = createAsyncThunk('jobs/fetchLocations', async () => {
+    const response = await axios.get('https://job-board-platform.onrender.com/api/job/locations');
     return response.data.results;
 });
 
@@ -31,7 +44,23 @@ const jobSlice = createSlice({
         },
         clearFilters: (state) => {
             state.filters = FILTERS;
+            state.jobs = state.allJobs;
         },
+        applyFilters: (state) => {
+            let filteredJobs = state.allJobs;
+
+            if (state.filters.location) {
+                filteredJobs = filteredJobs.filter(job => job.location.includes(state.filters.location));
+            }
+
+            state.jobs = filteredJobs;
+        },
+        setJobsPerPage: (state, action: PayloadAction<number>) => {
+            state.jobsPerPage = action.payload;
+        },
+        setCurrentPage: (state, action: PayloadAction<number>) => {
+            state.currentPage = action.payload;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -40,14 +69,18 @@ const jobSlice = createSlice({
             })
             .addCase(fetchJobs.fulfilled, (state, action: PayloadAction<JobProps[]>) => {
                 state.status = 'succeeded';
+                state.allJobs = action.payload;
                 state.jobs = action.payload;
             })
             .addCase(fetchJobs.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message || 'Something went wrong';
+            })
+            .addCase(fetchLocations.fulfilled, (state, action: PayloadAction<string[]>) => {
+                state.locations = action.payload;
             });
     },
 });
 
-export const { setFilters, clearFilters } = jobSlice.actions;
+export const { setFilters, clearFilters, applyFilters, setJobsPerPage, setCurrentPage } = jobSlice.actions;
 export default jobSlice.reducer;
