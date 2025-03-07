@@ -28,3 +28,21 @@ export interface CardProps {
 export interface ImageProps {
   image: string;
 }
+
+export interface Applicant {
+  id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+}
+
+export interface JobApplication {
+  id: string;
+  applicant: Applicant;
+  resume_link: string;
+  cover_letter: string;
+  status: "pending" | "approved" | "rejected";
+  applied_at: string; // ISO 8601 Date String
+  job: string;
+}

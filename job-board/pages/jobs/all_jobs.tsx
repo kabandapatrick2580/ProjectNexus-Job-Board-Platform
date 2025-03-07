@@ -1,8 +1,8 @@
-import JobList from "@/components/JobList";
+import JobList from "@/components/jobs/JobList";
 
 const JobsPage = () => {
     return (
-        <div>
+        <div style={{ margin: '0 auto', maxWidth: '1200px' }}>
             <JobList />
         </div>
     );
