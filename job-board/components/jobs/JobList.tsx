@@ -45,7 +45,8 @@ const JobList: React.FC = () => {
   const filteredJobs = jobs.filter((job) =>
     job.title.toLowerCase().includes(searchQuery) ||
     job.company.toLowerCase().includes(searchQuery) ||
-    job.location.toLowerCase().includes(searchQuery)
+    job.location.toLowerCase().includes(searchQuery) ||
+    job.experience_level.toLowerCase().includes(searchQuery)
   );
 
   // Calculate pagination indexes
