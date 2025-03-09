@@ -110,7 +110,7 @@ const JobList: React.FC = () => {
             return <Card key={job.id} job={job} logo={logo} />;
           })
         ) : (
-          <p>No jobs found</p>
+          <p></p>
         )}
       </div>
 

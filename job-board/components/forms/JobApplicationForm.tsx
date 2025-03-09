@@ -25,7 +25,8 @@ const JobApplicationForm = () => {
     console.log("access token:", token);
     console.log("refresh token:", refreshToken);
     if (!token) {
-      router.push("/login"); // Redirect to login if no token
+      router.push("/auth/login"); // Redirect to login if no token
+      setMessage("You must be logged in to apply.");
     }
   }, [router]);
 

@@ -36,9 +36,7 @@ const JobDetails: React.FC<JobDetailsProps> = ({ job }) => {
                 <h2 className="text-xl font-semibold">Job Description</h2>
                 <p className="text-gray-700 mt-2">{job.description}</p>
             </div>
-            <button className="mt-6 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
-                Apply Now
-            </button>
+
         </div>
     );
 }
