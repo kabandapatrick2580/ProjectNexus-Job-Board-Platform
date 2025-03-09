@@ -22,3 +22,34 @@ background-color: $bg;
 border: 1px solid $border;
 box-shadow: 0 4px 8px rgba($shadow, 0.2);
 }
+
+@mixin centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin text-box(
+  $padding, 
+  $border-width, 
+  $border-color, 
+  $border-radius, 
+  $bg-color, 
+  $color, 
+  $width, 
+  $font-size,
+  $primary-color
+) {
+  padding: $padding;
+  border: $border-width solid $border-color;
+  border-radius: $border-radius;
+  background-color: $bg-color;
+  color: $color;
+  width: $width;
+  font-size: $font-size;
+  outline: none;
+  
+  &:focus {
+    border-color: $primary-color; // Only changing the color
+  }
+}

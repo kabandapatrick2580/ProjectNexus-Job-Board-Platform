@@ -40,15 +40,16 @@ const Login = () => {
   
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg">
-      <h2 className="text-xl font-semibold mb-4">Login</h2>
+    <div className="form-container">
       {error && <p className="text-red-500">{error}</p>}
 
-      <form onSubmit={handleLogin} className="space-y-4">
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" className="w-full p-2 border rounded" required />
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" className="w-full p-2 border rounded" required />
+      <form onSubmit={handleLogin} className="form">
+      <h2 className="">Login</h2>
 
-        <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded">
+        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" className="input-box" required />
+        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" className="input-box" required />
+
+        <button type="submit" className="button">
           Login
         </button>
       </form>

@@ -126,3 +126,25 @@
   color: white;
 }
 
+.form-container {
+  @include centered-container;
+  height: 50vh;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 2rem;
+  border-radius: 8px;
+  background: $white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box
+}
+
+input {
+  @include text-box(10px, 2px, #ccc, 5px, #fff, #333, 90%, 16px, $primary-color);
+
+}
