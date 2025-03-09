@@ -28,8 +28,8 @@ const Login = () => {
       }
   
       // Store tokens in cookies
-      Cookies.set("accessToken", access_token, { expires: 1 });
-      Cookies.set("refreshToken", refresh_token, { expires: 7 });
+      Cookies.set("accessToken", access_token, { expires: 0.01 });
+      Cookies.set("refreshToken", refresh_token, { expires: 0.01 });
   
       router.push("/jobs/all_jobs");
     } catch (error: any) {

@@ -26,3 +26,13 @@ npm install
 8. implementation of props
     -interface/index.ts
 9. Implementation of pagination
+
+10. Implementaion of filter by location
+11. impl  of filter by experience_leve
+12. implementation of search by job title
+13. implementation of filter by job type
+14. implementation of filter by job category
+15. implementation of filter by experience level
+
+16. implementation of login page
+18. Job application form
