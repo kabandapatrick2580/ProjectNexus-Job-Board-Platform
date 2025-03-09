@@ -1,14 +1,14 @@
 import React from 'react';
+import JobList from "@/components/jobs/JobList";
+import Navbar from "@/components/common/NavBar";
 
 const Home: React.FC = () => {
-    return (
-        <div className="home-container">
-            <div className="content">
-                <h1>Land your first dream job 🚀🌟</h1>
-                <p>Start your journey with us today!</p>
-            </div>
-        </div>
-    );
+  return (
+    <div style={{ margin: '0 auto', maxWidth: '1200px' }}>
+        <Navbar/>
+        <JobList />
+    </div>
+);
 }
 
 export default Home;

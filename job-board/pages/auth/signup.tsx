@@ -29,8 +29,8 @@ const Signup = () => {
       Cookies.set("refreshToken", refresh_token, { expires: 7, secure: true });
 
       router.push("/jobs/all_jobs");
-    } catch (error: any) {
-      setError(error.response?.data?.error || "Error during sign up.");
+    } catch (error) {
+      setError((error as any).response?.data?.error || "Error during sign up.");
 
     }
   };

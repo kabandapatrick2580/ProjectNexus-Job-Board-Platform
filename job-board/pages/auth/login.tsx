@@ -9,7 +9,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
-  const [messageType, setMessageType] = useState<"success" | "error">("success");
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,7 +25,6 @@ const Login = () => {
       console.log("Refresh Token:", refresh_token);
   
       if (!access_token || !refresh_token) {
-        setMessageType("error");
         throw new Error("Tokens not received from API");
       }
   
@@ -37,7 +35,6 @@ const Login = () => {
       router.push("/jobs/all_jobs");
     } catch (error: any) {
       console.error("Login error:", error.response?.data || error.message);
-      setMessageType("error");
       setError(error.response?.data?.detail || "Invalid credentials");
     }
   };

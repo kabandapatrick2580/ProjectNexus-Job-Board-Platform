@@ -11,7 +11,7 @@ interface JobCardProps {
 };
 
 
-const Card: FC<JobCardProps> = ({ job,logo, children }) => {
+const Card: FC<JobCardProps> = ({ job,logo }) => {
   return (
     <div className="job-card">
         <div className="logo">

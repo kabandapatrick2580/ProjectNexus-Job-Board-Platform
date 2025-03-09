@@ -1,7 +1,7 @@
 import { useLogout } from "@/utils/logout";
 import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
-
+import Link from "next/link";
 
 const Navbar = () => {
     const logout = useLogout();
@@ -23,7 +23,7 @@ const Navbar = () => {
                 Logout
             </button>
             ) : (
-            <a href="/auth/login" className="hover:underline">Login</a>
+            <Link href="/auth/login" className="button">Login</Link>
             )}
         </div>
         </nav>
