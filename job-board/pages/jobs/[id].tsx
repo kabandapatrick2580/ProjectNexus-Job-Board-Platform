@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import JobDetails from "@/components/jobs/JobDetails";
+import Link from "next/link";
 
 export default function JobDetailPage() {
     const router = useRouter();
@@ -32,19 +33,27 @@ export default function JobDetailPage() {
     }
 
     if (!job) {
-        return <p>No job details available</p>;
+        return <p className="error-message">No job details available</p>;
     }
 
     return (
-        <div className="container mx-auto p-6">
+        <div className="form-container" style={{ margin: "0 auto", border: "1px solid #ccc", padding: "1rem", maxWidth:"600px" ,borderRadius: "5px" }}>
             <JobDetails job={job} />
             {/* Apply Now Button */}
-            <div className="mt-6">
-                <button
+            <div className="bottoms">
+                <div className="job-lists">
+                    <Link href="/jobs/all_jobs" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
+                        <i className="fi fi-rr-arrow-left"></i>
+                    </Link>
+                </div>
+                <button className="button"
                     onClick={() => router.push(`/jobs/${id}/apply`)}>
                     Apply Now
                 </button>
+ 
             </div>
+
+
         </div>
     );
 }
