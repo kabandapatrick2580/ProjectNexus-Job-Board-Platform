@@ -128,7 +128,34 @@
 
 .form-container {
   @include centered-container;
-  height: 50vh;
+  height: auto;
+  padding: 2rem;
+}
+.error-message {
+  color: red;
+  font-size: 10px;
+  background-color: #ffe4e4;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: 600;
+  animation: slideDown 0.5s ease;
+}
+.success-message{
+  color: green;
+  font-size: 10px;
+  background-color: #e4f9e4;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: 600;
+  animation: slideDown 0.5s ease;
+}
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 form {
@@ -139,12 +166,33 @@ form {
   border-radius: 8px;
   background: $white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
+  width: fit-content;
   box-sizing: border-box
 }
 
 input {
-  @include text-box(10px, 2px, #ccc, 5px, #fff, #333, 90%, 16px, $primary-color);
+  @include text-box(10px, 2px, #ccc, 5px, #fff, #333, auto, 14px, $primary-color);
+}
+.form-row{
+  display: flex;
+  gap: 10px;
+}
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column;
+  }
+  .form-container{
+    padding: 1rem;
+    height: auto;
+  }
+}
+
+textarea {
+  @include text-box(10px, 2px, #ccc, 5px, #fff, #333, auto, 16px, $primary-color);
+  height: 100px;
+}
+
+.text-container{
+  padding: 10px 15px;
 
 }

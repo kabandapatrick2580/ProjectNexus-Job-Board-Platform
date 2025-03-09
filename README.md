@@ -36,3 +36,8 @@ npm install
 
 16. implementation of login page
 18. Job application form
+19. Job application form validation
+20. Job application form submission
+21. implementation of styling the form
+22. message display by creating a new state mgt to track the message status
+

@@ -2,12 +2,14 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Cookies from "js-cookie";
+import Link from "next/link";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+  const [messageType, setMessageType] = useState<"success" | "error">("success");
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,6 +26,7 @@ const Login = () => {
       console.log("Refresh Token:", refresh_token);
   
       if (!access_token || !refresh_token) {
+        setMessageType("error");
         throw new Error("Tokens not received from API");
       }
   
@@ -34,6 +37,7 @@ const Login = () => {
       router.push("/jobs/all_jobs");
     } catch (error: any) {
       console.error("Login error:", error.response?.data || error.message);
+      setMessageType("error");
       setError(error.response?.data?.detail || "Invalid credentials");
     }
   };
@@ -41,9 +45,9 @@ const Login = () => {
 
   return (
     <div className="form-container">
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <p className="error-message">{error}</p>}
 
-      <form onSubmit={handleLogin} className="form">
+      <form onSubmit={handleLogin} >
       <h2 className="">Login</h2>
 
         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" className="input-box" required />
@@ -53,6 +57,9 @@ const Login = () => {
           Login
         </button>
       </form>
+      <Link href="/jobs/all_jobs">
+        Go back to job listings
+      </Link>
     </div>
   );
 };
