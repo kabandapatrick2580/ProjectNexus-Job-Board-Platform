@@ -16,18 +16,28 @@ const Login = () => {
         email,
         password,
       });
-
-      const { access, refresh } = response.data; // Get tokens from response
-
+  
+      console.log("Full API response:", response.data); // Log entire response
+  
+      const { access_token, refresh_token } = response.data; // Extract tokens
+      console.log("Access Token:", access_token);
+      console.log("Refresh Token:", refresh_token);
+  
+      if (!access_token || !refresh_token) {
+        throw new Error("Tokens not received from API");
+      }
+  
       // Store tokens in cookies
-      Cookies.set("accessToken", access, { expires: 1 }); // Expires in 1 day
-      Cookies.set("refreshToken", refresh, { expires: 7 }); // Expires in 7 days
-
-      router.push("/jobs/all_jobs"); // Redirect to jobs page after login
+      Cookies.set("accessToken", access_token, { expires: 1 });
+      Cookies.set("refreshToken", refresh_token, { expires: 7 });
+  
+      router.push("/jobs/all_jobs");
     } catch (error: any) {
+      console.error("Login error:", error.response?.data || error.message);
       setError(error.response?.data?.detail || "Invalid credentials");
     }
   };
+  
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg">

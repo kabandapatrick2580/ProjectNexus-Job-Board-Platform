@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { JobApplication } from "@/interfaces";
+import Cookies from "js-cookie";
 
 const JobApplicationForm = () => {
   const router = useRouter();
-  const { id: jobId } = router.query; // Get job ID from URL
+  const { id: jobId } = router.query;
 
   const [formData, setFormData] = useState({
     first_name: "",
@@ -18,6 +18,17 @@ const JobApplicationForm = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
+  useEffect(() => {
+    // Check if user is authenticated
+    const token = Cookies.get("accessToken");
+    const refreshToken = Cookies.get("refreshToken");
+    console.log("access token:", token);
+    console.log("refresh token:", refreshToken);
+    if (!token) {
+      router.push("/login"); // Redirect to login if no token
+    }
+  }, [router]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -27,49 +38,57 @@ const JobApplicationForm = () => {
     setLoading(true);
     setMessage("");
 
-    const applicationData: JobApplication = {
+    const token = Cookies.get("accessToken"); // Get token from cookies
+    if (!token) {
+      setMessage("You must be logged in to apply.");
+      setLoading(false);
+      return;
+    }
+
+    const applicationData = {
       resume_link: formData.resume_link,
       cover_letter: formData.cover_letter,
       job: jobId as string,
     };
 
     try {
-        console.log("Sending application data:", applicationData); // Debugging before request
-        
-        const response = await fetch("https://job-board-platform.onrender.com/api/application/", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(applicationData),
+      console.log("Sending application data:", applicationData);
+
+      const response = await fetch("https://job-board-platform.onrender.com/api/application/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Attach token here
+        },
+        body: JSON.stringify(applicationData),
+      });
+
+      console.log("Response status:", response.status);
+
+      if (response.ok) {
+        console.log("Application submitted successfully!");
+        setMessage("Application submitted successfully!");
+        setFormData({
+          first_name: "",
+          last_name: "",
+          email: "",
+          phone: "",
+          resume_link: "",
+          cover_letter: "",
         });
-      
-        console.log("Response status:", response.status); // Debugging response status
-      
-        if (response.ok) {
-          console.log("Application submitted successfully!"); // Debugging success
-          setMessage("Application submitted successfully!");
-          
-          // Reset form data
-          setFormData({
-            first_name: "",
-            last_name: "",
-            email: "",
-            phone: "",
-            resume_link: "",
-            cover_letter: "",
-          });
-        } else {
-          const errorResponse = await response.json();
-          console.error("Failed to submit application. Response:", errorResponse);
-          setMessage(errorResponse.detail);
-        }
-      } catch (error) {
-        console.error("Error occurred while submitting application:", error);
-        setMessage("An error occurred.");
-      } finally {
-        console.log("Application submission process finished.");
-        setLoading(false);
+      } else {
+        const errorResponse = await response.json();
+        console.error("Failed to submit application. Response:", errorResponse);
+        setMessage(errorResponse.detail || "Failed to submit application.");
       }
-    }      
+    } catch (error) {
+      console.error("Error occurred while submitting application:", error);
+      setMessage("An error occurred.");
+    } finally {
+      console.log("Application submission process finished.");
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg">
