@@ -57,13 +57,12 @@ const JobList: React.FC = () => {
 
   return (
     <div className="job-list">
-      <h1>Job Listings</h1>
-
       {/* Search Input */}
       <div className="search-container">
+        <i className="fi fi-rr-search"></i>
         <input
           type="text"
-          placeholder="Search jobs..."
+          placeholder="Search jobs by: Job title, Location, Company or Experience Level"
           value={searchQuery}
           onChange={handleSearchChange}
           className="search-input"
@@ -73,7 +72,7 @@ const JobList: React.FC = () => {
       {/* Filters Section */}
       <div className="filter-container">
         {/* Location Filter */}
-        <div>
+        <section>
           <label htmlFor="location">Filter by Location:</label>
           <select id="location" value={filters.location || ""} onChange={handleLocationChange}>
             <option value="">All Locations</option>
@@ -83,10 +82,10 @@ const JobList: React.FC = () => {
               </option>
             ))}
           </select>
-        </div>
+        </section>
 
         {/* Experience Level Filter */}
-        <div>
+        <section>
           <label htmlFor="experience">Filter by Experience Level:</label>
           <select id="experience" value={filters.experience_level || ""} onChange={handleExperienceChange}>
             <option value="">All Levels</option>
@@ -96,7 +95,7 @@ const JobList: React.FC = () => {
               </option>
             ))}
           </select>
-        </div>
+        </section>
       </div>
 
       {status === "loading" && <p>Loading jobs...</p>}

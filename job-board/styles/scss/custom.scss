@@ -28,7 +28,7 @@ p, li{
 }
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
     gap: 44px; // Adjust spacing between cards
     align-items: stretch; // Ensures cards stretch to equal height
   }

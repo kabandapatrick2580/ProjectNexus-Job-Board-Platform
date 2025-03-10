@@ -3,7 +3,7 @@ import Navbar from "@/components/common/NavBar";
 
 const JobsPage = () => {
     return (
-        <div style={{ margin: '0 auto', maxWidth: '1200px' }}>
+        <div style={{ margin: '0 auto' }}>
             <Navbar/>
             <JobList />
         </div>

@@ -28,7 +28,7 @@ const JobDetails: React.FC<JobDetailsProps> = ({ job }) => {
     return (
         <div className="job-contents">
             <div className="job-header">
-                <Image src={job.picture} alt={job.title} className="" />
+                <Image src={job.picture} alt={job.title} className="" width={50} height={50}/>
             <div className="job-title">
                 <div className="job-head">
                     <h1 className="">{job.title}</h1> <span className="co-name">at {job.company} - {job.location}</span>
