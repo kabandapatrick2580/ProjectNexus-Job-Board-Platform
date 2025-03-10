@@ -72,11 +72,12 @@ const JobList: React.FC = () => {
       {/* Filters Section */}
       <div className="filter-container">
         {/* Location Filter */}
+        <h2>Filters</h2>
         <section>
-          <label htmlFor="location">Filter by Location:</label>
+          <label htmlFor="location">Location:</label>
           <select id="location" value={filters.location || ""} onChange={handleLocationChange}>
             <option value="">All Locations</option>
-            {locations.map((location) => (
+              {locations.map((location) => (
               <option key={location} value={location}>
                 {location}
               </option>
@@ -86,7 +87,7 @@ const JobList: React.FC = () => {
 
         {/* Experience Level Filter */}
         <section>
-          <label htmlFor="experience">Filter by Experience Level:</label>
+          <label htmlFor="experience">Experience</label>
           <select id="experience" value={filters.experience_level || ""} onChange={handleExperienceChange}>
             <option value="">All Levels</option>
             {experienceLevels.map((level) => (
