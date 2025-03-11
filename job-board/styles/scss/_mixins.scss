@@ -39,7 +39,8 @@ box-shadow: 0 4px 8px rgba($shadow, 0.2);
   $color, 
   $width, 
   $font-size,
-  $primary-color
+  $primary-color,
+  $shadow-color
 ) {
   padding: $padding;
   border: $border-width solid $border-color;
@@ -49,8 +50,9 @@ box-shadow: 0 4px 8px rgba($shadow, 0.2);
   width: $width;
   font-size: $font-size;
   outline: none;
-  
+  box-shadow: 0 0 2px rgba($shadow-color, 0.3);
   &:focus {
     border-color: $primary-color; // Only changing the color
+    box-shadow: 0 0 10px rgba($shadow-color, 0.3);
   }
 }

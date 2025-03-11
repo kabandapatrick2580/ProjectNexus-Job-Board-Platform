@@ -62,7 +62,7 @@ const JobList: React.FC = () => {
         <i className="fi fi-rr-search"></i>
         <input
           type="text"
-          placeholder="Search jobs by: Job title, Location, Company or Experience Level"
+          placeholder="Search jobs by: Job title, Location, Company or Experience ..."
           value={searchQuery}
           onChange={handleSearchChange}
           className="search-input"
@@ -98,21 +98,25 @@ const JobList: React.FC = () => {
           </select>
         </section>
       </div>
-
-      {status === "loading" && <p>Loading jobs...</p>}
-      {status === "failed" && <p>Error: {error}</p>}
-
       {/* Job Cards */}
-      <div className="grid-container">
-        {currentJobs.length > 0 ? (
-          currentJobs.map((job, index) => {
-            const logo = SAMPLEIMAGES[index % SAMPLEIMAGES.length];
-            return <Card key={job.id} job={job} logo={logo} />;
-          })
-        ) : (
-          <p></p>
-        )}
-      </div>
+      <div className="grid-container">    
+      {status === "loading" && <p className="success-message" style={{ margin: "0 auto", height: "fit-content" }}>Loading jobs...</p>}
+      {status === "failed" && <p>Error: {error}</p>}
+      
+      {status !== "loading" && currentJobs.length > 0 ? (
+        currentJobs.map((job, index) => {
+          const logo = SAMPLEIMAGES[index % SAMPLEIMAGES.length];
+          return <Card key={job.id} job={job} logo={logo} />;
+        })
+      ) : (
+        status !== "loading" && (
+          <p className="error-message" style={{ margin: "0 auto", height: "fit-content" }}>
+            No jobs
+          </p>
+        )
+      )}
+    </div>
+
 
       {/* Pagination */}
       <div className="pagination">
