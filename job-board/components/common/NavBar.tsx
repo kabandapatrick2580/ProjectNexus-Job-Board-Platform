@@ -2,7 +2,7 @@ import { useLogout } from "@/utils/logout";
 import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-
+import Image from "next/image";
 const Navbar = () => {
     const logout = useLogout();
     const [token, setToken] = useState<string | null>(null);
@@ -13,19 +13,25 @@ const Navbar = () => {
         setRefreshToken(Cookies.get("refreshToken") || null);
     }
     , []);
-
     return (
-        <nav className="flex justify-between items-center p-4 bg-gray-800 text-white">
-        <h1 className="text-lg font-bold">Job Board</h1>
-        <div>
-            {token && refreshToken ? (
-            <button onClick={logout} className="bg-red-500 px-4 py-2 rounded hover:bg-red-600">
-                Logout
-            </button>
-            ) : (
-            <Link href="/auth/login" className="button">Login</Link>
-            )}
-        </div>
+        <nav className="header">
+            <div className="logo">
+                <Image src="/images/dreamjob_logo.svg" alt="Logo" width={50} height={50} />
+                <p className="logo-name">DreamJob</p>
+            </div>
+            <div className="nav-links">
+                <Link href="/">Home</Link>
+                <Link href="/jobs/all_jobs">Jobs</Link>
+            </div>
+            <div>
+                {token && refreshToken ? (
+                <button onClick={logout} className="bg-red-500 px-4 py-2 rounded hover:bg-red-600">
+                    Logout
+                </button>
+                ) : (
+                <Link href="/auth/login" className="button">Login</Link>
+                )}
+            </div>
         </nav>
     );
 };

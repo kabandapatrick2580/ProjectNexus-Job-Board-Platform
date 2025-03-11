@@ -2,12 +2,14 @@
 @use 'components' as *;
 @use 'mixins' as *;
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 body{
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     line-height: 1.5;
     background-color: $primary-background;
+    margin: 0;
+    padding: 0;
 }
 
 h2{
