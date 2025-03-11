@@ -351,3 +351,34 @@ textarea {
     grid-column: 2/ span 3;
   }
 }
+@media(max-width: 800px){
+  .job-list{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    label{
+      display: none;
+    }
+    .filter-container{
+      order: 1;
+      width: 100%;
+    }
+    .search-container{
+      order: 2;
+      input{
+        width: 200px;
+      }
+
+    }
+    .grid-container{
+      order: 3;
+    }
+    .pagination{
+      order: 4;
+    }
+  }
+}
+
+
