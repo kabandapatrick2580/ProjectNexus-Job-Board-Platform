@@ -15,17 +15,24 @@ const Navbar = () => {
     , []);
 
     return (
-        <nav className="flex justify-between items-center p-4 bg-gray-800 text-white">
-        <h1 className="text-lg font-bold">Job Board</h1>
-        <div>
-            {token && refreshToken ? (
-            <button onClick={logout} className="bg-red-500 px-4 py-2 rounded hover:bg-red-600">
-                Logout
-            </button>
-            ) : (
-            <Link href="/auth/login" className="button">Login</Link>
-            )}
-        </div>
+        <nav className="">
+            <div className="logo">
+                <h1 className="">Job Board</h1>
+                <i className="fi fi-rr-briefcase"></i>
+            </div>
+            <div className="links">
+                <Link href="/" className="link">Home</Link>
+                <Link href="/jobs/all_jobs" className="link">Jobs</Link>
+            </div>
+            <div>
+                {token && refreshToken ? (
+                <button onClick={logout} className="white-button">
+                    Logout
+                </button>
+                ) : (
+                <Link href="/auth/login" className="button">Login</Link>
+                )}
+            </div>
         </nav>
     );
 };
