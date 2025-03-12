@@ -2,7 +2,7 @@ import { useLogout } from "@/utils/logout";
 import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-
+import Image from "next/image";
 const Navbar = () => {
     const logout = useLogout();
     const [token, setToken] = useState<string | null>(null);
@@ -13,12 +13,12 @@ const Navbar = () => {
         setRefreshToken(Cookies.get("refreshToken") || null);
     }
     , []);
-
     return (
         <nav className="">
             <div className="logo">
-                <h1 className="">Job Board</h1>
                 <i className="fi fi-rr-briefcase"></i>
+                <h1 className="">DreamJob</h1>
+
             </div>
             <div className="links">
                 <Link href="/" className="link">Home</Link>
@@ -30,7 +30,7 @@ const Navbar = () => {
                     Logout
                 </button>
                 ) : (
-                <Link href="/auth/login" className="button">Login</Link>
+                <Link href="/auth/login" className="white-button">Login</Link>
                 )}
             </div>
         </nav>
