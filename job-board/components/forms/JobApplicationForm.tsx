@@ -82,7 +82,7 @@ const JobApplicationForm = () => {
       } else {
         const errorResponse = await response.json();
         console.error("Failed to submit application. Response:", errorResponse);
-        setMessage(errorResponse.detail || "Failed to submit application.");
+        setMessage(errorResponse.detail || errorResponse.error  || "Failed to submit application.");
         setMessageType("error");
       }
     } catch (error) {

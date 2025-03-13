@@ -33,7 +33,11 @@ const Card: FC<JobCardProps> = ({ job,logo }) => {
       </div>
       <div className="job-title">
         <h3 className="job">{job.title}</h3>
-        <p className='job-experience'>{job.experience_level.charAt(0).toUpperCase()+job.experience_level.slice(1)}-Level</p>
+        <p className="job-experience">
+          {job.experience_level
+            ? `${job.experience_level.charAt(0).toUpperCase()}${job.experience_level.slice(1)}-Level`
+            : "not specified"}
+</p>
       </div>
       <Link className="button" href={`/jobs/${job.id}`}>Job Details
       </Link>

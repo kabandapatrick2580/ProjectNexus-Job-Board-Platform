@@ -18,7 +18,6 @@ const Navbar = () => {
             <div className="logo">
                 <Image src="/images/dreamjob_logo.svg" alt="DreamJob Logo" width={50} height={50} />
                 <h1 className="">DreamJob</h1>
-
             </div>
             <div className="links">
                 <Link href="/" className="link">Home</Link>

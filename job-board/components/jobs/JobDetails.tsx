@@ -22,7 +22,7 @@ const JobDetails: React.FC<JobDetailsProps> = ({ job }) => {
     if(!job)
         return <p>No job details available</p>;
     const capitalizeFirstLetter = (str: string) => {
-        return str.charAt(0).toUpperCase() + str.slice(1);
+        return (str ? str.charAt(0).toUpperCase() + str.slice(1) : "");
 
     };
 
