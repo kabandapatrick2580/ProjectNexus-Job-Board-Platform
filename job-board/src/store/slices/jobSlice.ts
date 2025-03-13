@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import axios from 'axios';
+import axios, { AxiosError} from 'axios';
 import { JobProps } from '@/interfaces';
 import { FILTERS } from '@/constants/filters';
 
@@ -29,9 +29,36 @@ const initialState: JobState = {
     currentPage: 1,
 };
 
-export const fetchJobs = createAsyncThunk('jobs/fetchJobs', async () => {
-    const response = await axios.get('https://job-board-platform.onrender.com/api/job');
+
+// Create an instance of axios with a base URL
+const axiosInstance = axios.create({
+  baseURL: 'https://job-board-platform.onrender.com/api',
+  withCredentials: true, // Include credentials if needed
+});
+
+export const fetchJobs = createAsyncThunk('jobs/fetchJobs', async (_, { rejectWithValue }) => {
+  try {
+    const response = await axiosInstance.get('/job');
     return response.data.results;
+  } catch (error) {
+    // Type guard to check if error is an instance of AxiosError
+    if (axios.isAxiosError(error)) {
+      const axiosError = error as AxiosError;
+      if (axiosError.response) {
+        // Server responded with a status other than 2xx
+        console.error('Error response:', axiosError.response.data);
+        return rejectWithValue(axiosError.response.data);
+      } else if (axiosError.request) {
+        // No response was received
+        console.error('No response received:', axiosError.request);
+        return rejectWithValue('No response received');
+      }
+    } else {
+      // Error occurred while setting up the request
+      console.error('Error message:', error);
+      return rejectWithValue((error as Error).message);
+    }
+  }
 });
 
 export const fetchLocations = createAsyncThunk('jobs/fetchLocations', async () => {
