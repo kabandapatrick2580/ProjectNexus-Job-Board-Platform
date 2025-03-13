@@ -200,15 +200,7 @@ input {
   display: flex;
   gap: 10px;
 }
-@media (max-width: 600px) {
-  .form-row {
-    flex-direction: column;
-  }
-  .form-container{
-    padding: 1rem;
-    height: auto;
-  }
-}
+
 
 textarea {
   @include text-box(10px, 2px, #ccc, 5px, #fff, #333, auto, 16px, $primary-color, $shadow-color);
@@ -464,9 +456,51 @@ nav{
     }
     .image{
       img{
-        width: 500px;
-        height: 700px;
+        width: 80%;
+        height: 100vh;
         object-fit: cover;
       }
     }
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column;
+  }
+  .form-container{
+    padding: 1rem;
+    height: auto;
+  }
+  .hero-section {
+    .contents{
+      h1{
+        font-size: 2rem;
+        line-height: 3rem;
+      }
+      h2{
+        font-size: 1rem;
+      }
+      p{
+        font-size: 1rem;
+      }
+    }
+  }
+  .job-list{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    .search-container{
+      margin: 0 auto;
+      input{
+        width: inherit;
+      }
+    }
+    .filter-container{
+      width:100%;
+      margin-right: 0;
+    }
+  }
 }

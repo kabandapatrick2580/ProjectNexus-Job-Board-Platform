@@ -7,7 +7,7 @@ import { SAMPLEIMAGES } from "@/constants";
 
 const JobList: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
-  const { jobs, status, error, locations, experienceLevels, filters } = useSelector((state: RootState) => state.jobs);
+  const { jobs, status, error, locations, experienceLevels, filters, categories } = useSelector((state: RootState) => state.jobs);
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -31,6 +31,13 @@ const JobList: React.FC = () => {
   // Handle experience level filter change
   const handleExperienceChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(setFilters({ experience_level: event.target.value }));
+    dispatch(applyFilters());
+    setCurrentPage(1);
+  };
+
+  // Handle category filter change
+  const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(setFilters({ category: event.target.value }));
     dispatch(applyFilters());
     setCurrentPage(1);
   };
@@ -93,6 +100,18 @@ const JobList: React.FC = () => {
             {experienceLevels.map((level) => (
               <option key={level} value={level}>
                 {level}
+              </option>
+            ))}
+          </select>
+        </section>
+        {/* Category Filter */}
+        <section>
+          <label htmlFor="category">Category:</label>
+          <select id="category" value={filters.category || ""} onChange={handleCategoryChange}>
+            <option value="">All Categories</option>
+            {categories.map((category) => (
+              <option key={category} value={category}>
+                {category}
               </option>
             ))}
           </select>
