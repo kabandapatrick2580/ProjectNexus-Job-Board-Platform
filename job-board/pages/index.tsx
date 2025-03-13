@@ -6,7 +6,6 @@ import Link from "next/link";
 const Home: React.FC = () => {
   return (
     <div>
-        <Navbar/>
         <div className="hero-section">
           <div className="image">
             <Image src="/images/hero-image.jpg" height={500} width={500} alt="hero-image" />

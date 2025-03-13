@@ -23,16 +23,16 @@ const JobDetails: React.FC<JobDetailsProps> = ({ job }) => {
         return <p>No job details available</p>;
     const capitalizeFirstLetter = (str: string) => {
         return str.charAt(0).toUpperCase() + str.slice(1);
+
     };
+
 
     return (
         <div className="job-contents">
             <div className="job-header">
-                <Image src={job.picture} alt={job.title} className="" width={50} height={50}/>
             <div className="job-title">
                 <div className="job-head">
                     <h1 className="">{job.title}</h1> <span className="co-name">at {job.company} - {job.location}</span>
-
                 </div>
                 <div className="short-description">
                     <i className="fi fi-rr-time-quarter-past"></i>          
@@ -42,7 +42,7 @@ const JobDetails: React.FC<JobDetailsProps> = ({ job }) => {
                 </div>
             </div>
             </div>
-            <p className="text-gray-600 mt-2">
+            <p>
                 <strong>Experience Level:</strong> {capitalizeFirstLetter(job.experience_level)}-Level
             </p>
             <p className="text-gray-600">
