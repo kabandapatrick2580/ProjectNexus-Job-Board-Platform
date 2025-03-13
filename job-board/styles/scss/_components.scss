@@ -463,7 +463,19 @@ nav{
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
+  nav{
+    .logo{
+      h1{
+        font-size: 12px;
+      }
+    }
+    .links{
+      gap: 10px;
+      a {font-size: 12px;
+        font-weight: 400;
+    }}
+  }
   .form-row {
     flex-direction: column;
   }
@@ -494,13 +506,56 @@ nav{
     align-items: center;
     .search-container{
       margin: 0 auto;
+      order:2;
       input{
         width: inherit;
       }
     }
     .filter-container{
       width:100%;
-      margin-right: 0;
+      order: 1;
+    }
+    .grid-container{
+      width: 100%;
+      order: 3;
+    }
+    .pagination{
+      width: 100%;
+      order: 4;
     }
   }
+}
+
+// tablets
+@media (max-width: 1028px) {
+  .job-list{
+    .search-container{
+      input{
+        width: 300px;
+      }
+    }
+    .grid-container{
+      width: 100%;
+    }
+  }
+}
+
+.loading-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.loading-button:hover {
+  background-color: #0056b3;
+}
+
+.loading-button.loading {
+  background-color: #6c757d;
+  cursor: not-allowed;
 }

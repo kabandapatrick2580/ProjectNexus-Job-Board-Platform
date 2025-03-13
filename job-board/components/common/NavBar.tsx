@@ -3,11 +3,11 @@ import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+
 const Navbar = () => {
     const logout = useLogout();
     const [token, setToken] = useState<string | null>(null);
     const [refreshToken, setRefreshToken] = useState<string | null>(null);
-
     useEffect(() => {
         setToken(Cookies.get("accessToken") || null);
         setRefreshToken(Cookies.get("refreshToken") || null);
@@ -16,7 +16,7 @@ const Navbar = () => {
     return (
         <nav className="">
             <div className="logo">
-                <i className="fi fi-rr-briefcase"></i>
+                <Image src="/images/dreamjob_logo.svg" alt="DreamJob Logo" width={50} height={50} />
                 <h1 className="">DreamJob</h1>
 
             </div>

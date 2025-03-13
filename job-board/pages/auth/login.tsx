@@ -54,9 +54,6 @@ const Login = () => {
           Login
         </button>
       </form>
-      <Link href="/jobs/all_jobs">
-        Go back to job listings
-      </Link>
     </div>
   );
 };

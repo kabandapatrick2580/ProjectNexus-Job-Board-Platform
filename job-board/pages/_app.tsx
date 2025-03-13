@@ -14,6 +14,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>DreamJob | Land the job of your Dreams</title>
         <meta name="description" content="DreamJob is a job board platform that connects skilled professionals with top employers." />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        
+        <link rel="icon" href="/images/dreamjob_logo.svg" />
       </Head>
       <Navbar />
       <Component {...pageProps} />
